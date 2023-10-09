@@ -16,10 +16,6 @@
     - name: Reboot the system
       ansible.builtin.reboot:
 
-    - name: Wait 90sec for system reboot
-      ansible.builtin.pause:
-        seconds: 90
-
     - name: Download Jenkins GPG key
       ansible.builtin.get_url:
         url: https://pkg.jenkins.io/debian-stable/jenkins.io-2023.key
