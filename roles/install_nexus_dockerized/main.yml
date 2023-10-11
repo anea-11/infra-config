@@ -1,0 +1,22 @@
+- name: Pull Nexus Docker image
+  community.docker.docker_image:
+    name: sonatype/nexus3:3.61.0
+    source: pull
+    pull:
+      platform: amd64
+    state: present
+
+- name: Create Docker volume for Nexus data
+  community.docker.docker_volume:
+    name: nexus-data
+    state: present
+
+- name: Run Nexus Docker container
+  community.docker.docker_container:
+    name: nexus
+    image: sonatype/nexus3:3.61.0
+    ports:
+      - "8081:8081"
+    volumes:
+      - nexus-data:/nexus-data
+    state: started

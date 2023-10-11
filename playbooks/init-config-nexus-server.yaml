@@ -12,5 +12,6 @@
     - import_role: 
         name: install_docker
 
-    - import_tasks: ../tasks/pull_and_run_nexus_container.yaml
+    - import_role: 
+        name: install_nexus_dockerized
 
