@@ -92,7 +92,7 @@
     - name: Copy sample videos to target
       ansible.builtin.copy:
         dest: /videos
-        src: /videos
+        src: /videos/
     
     - name: Copy docker-compose to target
       ansible.builtin.copy:
@@ -111,6 +111,12 @@
       ansible.builtin.file:
         path: /docker_image_archives/
         state: absent
+
+    - name: Set hostname env var for frontend service
+      replace:
+        path: /docker_compose/encoding-app/docker-compose.yaml
+        regexp: 'localhost'
+        replace: "{{ansible_host}}"
 
     - name: Start encoding app containers
       community.docker.docker_compose:
