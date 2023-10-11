@@ -1,0 +1,34 @@
+---
+- name: Download Jenkins GPG key
+  ansible.builtin.get_url:
+    url: https://pkg.jenkins.io/debian-stable/jenkins.io-2023.key
+    dest: /usr/share/keyrings/jenkins-keyring.asc
+  register: download_result
+
+- name: Add Jenkins GPG key to keyring
+  ansible.builtin.command: gpg --yes --dearmor -o /usr/share/keyrings/jenkins-keyring.gpg /usr/share/keyrings/jenkins-keyring.asc
+  when: download_result.changed
+
+- name: Add Jenkins repository to sources.list.d
+  ansible.builtin.lineinfile:
+    path: /etc/apt/sources.list.d/jenkins.list
+    line: "deb [signed-by=/usr/share/keyrings/jenkins-keyring.gpg] https://pkg.jenkins.io/debian-stable binary/"
+    create: yes
+  when: download_result.changed
+
+- name: Update package cache
+  ansible.builtin.apt:
+    update_cache: yes
+
+- name: Install Fontconfig and OpenJDK
+  ansible.builtin.apt:
+    name:
+      - fontconfig
+      - openjdk-17-jre
+    state: present
+
+- name: Install Jenkins
+  ansible.builtin.apt:
+    name:
+      - jenkins
+    state: present
