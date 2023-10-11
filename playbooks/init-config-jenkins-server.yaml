@@ -12,5 +12,6 @@
 
     - import_tasks: ../tasks/install_jenkins.yaml
 
-    - import_tasks: ../tasks/install_docker.yaml
+    - import_role: 
+        name: install_docker
 

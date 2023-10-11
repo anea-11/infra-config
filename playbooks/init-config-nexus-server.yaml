@@ -9,7 +9,8 @@
     - name: Reboot the system
       ansible.builtin.reboot:
 
-    - import_tasks: ../tasks/install_docker.yaml
+    - import_role: 
+        name: install_docker
 
     - import_tasks: ../tasks/pull_and_run_nexus_container.yaml
 
