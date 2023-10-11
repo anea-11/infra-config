@@ -1,0 +1,15 @@
+---
+- name: Initial Encoding server configuration
+  hosts: encoding_servers
+  become: yes
+
+  tasks:
+    - import_tasks: ../tasks/update_all_packages.yaml
+
+    - name: Reboot the system
+      ansible.builtin.reboot:
+
+    - import_tasks: ../tasks/install_docker.yaml
+
+    - import_tasks: ../tasks/deploy-encoding-app.yaml
+

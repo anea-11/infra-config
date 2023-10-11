@@ -1,0 +1,15 @@
+---
+- name: Initial Nexus server configuration
+  hosts: nexus_servers
+  become: yes
+
+  tasks:
+    - import_tasks: ../tasks/update_all_packages.yaml
+
+    - name: Reboot the system
+      ansible.builtin.reboot:
+
+    - import_tasks: ../tasks/install_docker.yaml
+
+    - import_tasks: ../tasks/pull_and_run_nexus_container.yaml
+

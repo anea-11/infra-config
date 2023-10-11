@@ -1,0 +1,16 @@
+---
+- name: Initial Jenkins server configuration
+  hosts: jenkins_servers
+  become: yes
+
+  tasks:
+
+    - import_tasks: ../tasks/update_all_packages.yaml
+
+    - name: Reboot the system
+      ansible.builtin.reboot:
+
+    - import_tasks: ../tasks/install_jenkins.yaml
+
+    - import_tasks: ../tasks/install_docker.yaml
+
