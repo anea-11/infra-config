@@ -1,0 +1,39 @@
+---
+- name: Copy Docker image archives to target
+  ansible.builtin.copy:
+    dest: /docker_image_archives/arm
+    src: /docker_image_archives/arm/
+
+- name: Copy sample videos to target
+  ansible.builtin.copy:
+    dest: /videos
+    src: /videos/
+
+- name: Copy docker-compose to target
+  ansible.builtin.copy:
+    dest: /docker_compose/encoding-app
+    src: /docker_compose/encoding-app/
+
+- name: Load encoding service image
+  community.docker.docker_image_load:
+    path: /docker_image_archives/arm/encoder-x265-img.tar
+
+- name: Load frontend service image
+  community.docker.docker_image_load:
+    path: /docker_image_archives/arm/frontend-encoding-img.tar
+
+- name: Delete docker image archives
+  ansible.builtin.file:
+    path: /docker_image_archives/
+    state: absent
+
+- name: Set hostname env var for frontend service
+  replace:
+    path: /docker_compose/encoding-app/docker-compose.yaml
+    regexp: 'localhost'
+    replace: "{{ansible_host}}"
+
+- name: Start encoding app containers
+  community.docker.docker_compose:
+    project_src: /docker_compose/encoding-app
+    state: present

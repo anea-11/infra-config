@@ -13,4 +13,6 @@
     - import_role: 
         name: install_docker
 
-    - import_tasks: ../tasks/deploy-encoding-app.yaml
+    - import_role:
+        name: deploy_encoding_app
+
