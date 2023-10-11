@@ -5,7 +5,8 @@
 
   tasks:
 
-    - import_tasks: ../tasks/update_all_packages.yaml
+    - import_role:
+        name: update_all_packages
 
     - name: Reboot the system
       ansible.builtin.reboot:

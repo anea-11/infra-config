@@ -1,3 +1,4 @@
+---
 - name: Pull Nexus Docker image
   community.docker.docker_image:
     name: sonatype/nexus3:3.61.0
