@@ -7,3 +7,7 @@
   ansible.builtin.apt:
     name: "*"
     state: latest
+
+- name: Reboot the system
+    ansible.builtin.reboot:
+  when: reboot_after_update

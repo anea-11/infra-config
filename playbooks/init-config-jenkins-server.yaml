@@ -7,9 +7,8 @@
 
     - import_role:
         name: update_all_packages
-
-    - name: Reboot the system
-      ansible.builtin.reboot:
+        vars:
+          reboot_after_update: true
 
     - import_role:
         name: install_jenkins
