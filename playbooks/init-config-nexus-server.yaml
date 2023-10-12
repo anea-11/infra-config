@@ -3,16 +3,13 @@
   hosts: nexus_servers
   become: yes
 
-  tasks:
+  roles:
 
-    - import_role:
-        name: update_all_packages
-        vars:
-          reboot_after_update: true
+    - role: update_all_packages
+      vars:
+        reboot_after_update: true
 
-    - import_role: 
-        name: install_docker
+    - role: install_docker
 
-    - import_role: 
-        name: install_nexus_dockerized
+    - role: install_nexus_dockerized
 

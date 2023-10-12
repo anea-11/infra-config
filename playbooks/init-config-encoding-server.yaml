@@ -3,16 +3,12 @@
   hosts: encoding_servers
   become: yes
 
-  tasks:
+  roles:
 
-    - import_role:
-        name: update_all_packages
-        vars:
-          reboot_after_update: true
+    - role: update_all_packages
+      vars:
+        reboot_after_update: true
 
-    - import_role: 
-        name: install_docker
+    - role: install_docker
 
-    - import_role:
-        name: deploy_encoding_app
-
+    - role: deploy_encoding_app
