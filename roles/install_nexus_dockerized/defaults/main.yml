@@ -1,0 +1,4 @@
+---
+nexus_version: 3.61.0
+nexus_target_platform: amd64
+nexus_port: 8081

@@ -14,3 +14,7 @@
         user_to_add_to_docker_group: ubuntu
 
     - role: install_nexus_dockerized
+      vars:
+        nexus_version: 3.61.0
+        nexus_target_platform: amd64
+        nexus_port: 8081
