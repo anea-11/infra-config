@@ -63,7 +63,8 @@
 
 - name: Add ubuntu user to Docker group
   ansible.builtin.user:
-    name: ubuntu
+    name: "{{ user_to_add_to_docker_group }}"
     groups: docker
     append: yes
+  when: user_to_add_to_docker_group | default(false)
 

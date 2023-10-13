@@ -11,3 +11,5 @@
     - role: install_jenkins
 
     - role: install_docker
+      vars:
+        user_to_add_to_docker_group: ubuntu

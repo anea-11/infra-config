@@ -9,5 +9,5 @@
     state: latest
 
 - name: Reboot the system
-    ansible.builtin.reboot:
+  ansible.builtin.reboot:
   when: reboot_after_update

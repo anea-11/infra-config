@@ -10,6 +10,7 @@
         reboot_after_update: true
 
     - role: install_docker
+      vars:
+        user_to_add_to_docker_group: ubuntu
 
     - role: install_nexus_dockerized
-
