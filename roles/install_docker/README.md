@@ -1,0 +1,1 @@
+Define user_to_add_to_docker_group variable if you want user to be added to docker group when installing docker. (see tasks/main.yml)
