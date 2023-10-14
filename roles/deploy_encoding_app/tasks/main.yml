@@ -38,9 +38,9 @@
         frontend-service:
           image: "{{ frontend_img_name }}:{{ frontend_img_version }}"
           environment:
-            - WEBSERVER_HOSTNAME="{{ ansible_host }}"
-            - WEBSERVER_PORT="{{ frontend_port }}"
-            - ENCODING_ENDPOINT="{{ encoding_endpoint }}"
+            - WEBSERVER_HOSTNAME={{ ansible_host }}
+            - WEBSERVER_PORT={{ frontend_port }}
+            - ENCODING_ENDPOINT={{ encoding_endpoint }}
           ports:
             - "{{ frontend_port }}:80"
           depends_on:
