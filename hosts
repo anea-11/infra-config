@@ -3,9 +3,9 @@
 # ansible all -i hosts -m ping -> to verify connection
 
 [aws_ec2_servers]
-3.73.76.236
-18.192.182.144
-3.79.59.11
+3.71.95.122
+18.156.155.64
+3.67.71.92
 
 [aws_ec2_servers:children]
 jenkins_servers
@@ -17,10 +17,10 @@ ansible_ssh_private_key_file=TODO
 ansible_user=TODO
 
 [jenkins_servers]
-3.73.76.236
+3.71.95.122
 
 [nexus_servers]
-18.192.182.144
+18.156.155.64
 
 [encoding_servers]
-3.79.59.11
+3.67.71.92
