@@ -1,0 +1,4 @@
+frontend_port:        8080
+encoding_endpoint:    encode
+encoder_img_version:  latest
+frontend_img_version: latest

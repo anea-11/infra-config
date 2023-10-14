@@ -5,8 +5,5 @@ docker_image_archives_dir_src: /docker_image_archives/arm/
 videos_dir_dest: /videos/
 videos_dir_src: /videos/
 
-docker_compose_dir_dest: /docker_compose/encoding-app/
-docker_compose_dir_src: /docker_compose/encoding-app/
-
-encoder_img_archive_name: encoder-x265-img.tar
-frontend_img_archive_name: frontend-encoding-img.tar
+encoder_img_name: encoder-x265-img
+frontend_img_name: frontend-encoding-img
