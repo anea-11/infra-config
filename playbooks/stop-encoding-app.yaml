@@ -1,0 +1,12 @@
+- name: Stop encoding app
+  hosts: encoding_servers
+  become: yes
+
+  tasks:
+    - name: Stop all encoding and frontend contianers
+      ansible.builtin.shell: |
+        docker stop $(docker container ls --filter name=encoding-app -q)
+
+    - name: Remove all encoding and frontend contianers
+      ansible.builtin.shell: |
+        docker rm $(docker container ls -a --filter name=encoding-app -q)
