@@ -1,0 +1,11 @@
+- name: Deploy encoding app
+  hosts: encoding_servers
+  become: yes
+
+  roles:
+    - role: deploy_encoding_app
+      vars:
+        frontend_port: 8080
+        encoding_endpoint: encode
+        encoder_img_version: 0
+        frontend_img_version: 0
