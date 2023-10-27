@@ -1,6 +1,0 @@
----
-docker_image_archives_dir_dest: /docker_image_archives/arm/
-docker_image_archives_dir_src: /docker_image_archives/arm/
-
-encoder_img_name: encoder-x265-img
-frontend_img_name: frontend-encoding-img

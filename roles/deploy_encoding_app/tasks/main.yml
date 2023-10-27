@@ -1,21 +1,13 @@
 ---
-- name: Copy Docker image archives to target
-  ansible.builtin.copy:
-    dest: "{{ docker_image_archives_dir_dest }}"
-    src: "{{ docker_image_archives_dir_src }}"
+- name: Pull encoder image
+  community.docker.docker_image:
+    name: {{ docker_registry }}/{{ encoder_img_name }}:{{ encoder_img_version }}
+    source: pull
 
-- name: Load encoding service image
-  community.docker.docker_image_load:
-    path: "{{ docker_image_archives_dir_dest + encoder_img_name }}.tar"
-
-- name: Load frontend service image
-  community.docker.docker_image_load:
-    path: "{{ docker_image_archives_dir_dest + frontend_img_name }}.tar"
-
-- name: Delete docker image archives
-  ansible.builtin.file:
-    path: docker_image_archives_dir_dest
-    state: absent
+- name: Pull frontend image
+  community.docker.docker_image:
+    name: {{ docker_registry }}/{{ frontend_img_name }}:{{ frontend_img_version }}
+    source: pull
 
 - name: Start encoding app containers
   community.docker.docker_compose:
