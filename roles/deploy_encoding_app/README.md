@@ -1,0 +1,1 @@
+You must externally log in to docker registry before executing this role
