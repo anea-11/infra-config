@@ -4,11 +4,6 @@
     dest: "{{ docker_image_archives_dir_dest }}"
     src: "{{ docker_image_archives_dir_src }}"
 
-- name: Copy sample videos to target
-  ansible.builtin.copy:
-    dest: "{{ videos_dir_dest }}"
-    src: "{{ videos_dir_src }}"
-
 - name: Load encoding service image
   community.docker.docker_image_load:
     path: "{{ docker_image_archives_dir_dest + encoder_img_name }}.tar"
@@ -34,7 +29,7 @@
             - X265_ENC_HOSTNAME=0.0.0.0
             - X265_ENC_PORT=9000
           volumes:
-            - "{{ videos_dir_dest }}:/videos"
+            - "/videos:/videos"
         frontend-service:
           image: "{{ frontend_img_name }}:{{ frontend_img_version }}"
           environment:

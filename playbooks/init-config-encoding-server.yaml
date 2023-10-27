@@ -13,3 +13,9 @@
       vars:
         user_to_add_to_docker_group: ubuntu
 
+  tasks:
+    - name: Copy sample videos to target
+      ansible.builtin.copy:
+        dest: "/videos"
+        src: "{{ videos_dir_src }}"
+
