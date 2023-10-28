@@ -14,10 +14,6 @@
     name: "{{ docker_registry }}:{{ frontend_img_name }}-{{ frontend_img_version }}"
     source: pull
 
-- name: Log out of DockerHub
-  community.docker.docker_login:
-    state: absent
-
 - name: Start encoding app containers
   community.docker.docker_compose:
     project_name: encoding-app
@@ -25,14 +21,14 @@
       version: '3'
       services:
         encoding-service:
-          image: "{{ encoder_img_name }}:{{ encoder_img_version }}"
+          image: "{{ docker_registry }}:{{ encoder_img_name }}-{{ encoder_img_version }}"
           environment:
             - X265_ENC_HOSTNAME=0.0.0.0
             - X265_ENC_PORT=9000
           volumes:
             - "/videos:/videos"
         frontend-service:
-          image: "{{ frontend_img_name }}:{{ frontend_img_version }}"
+          image: "{{ docker_registry }}:{{ frontend_img_name }}-{{ frontend_img_version }}"
           environment:
             - WEBSERVER_HOSTNAME={{ ansible_host }}
             - WEBSERVER_PORT={{ frontend_port }}
@@ -42,3 +38,7 @@
           depends_on:
             - encoding-service
     state: present
+
+- name: Log out of DockerHub
+  community.docker.docker_login:
+    state: absent
