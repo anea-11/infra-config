@@ -1,5 +1,4 @@
 # Ansible inventory list
-# Fill in TODOs to connect to hosts
 # ansible all -i hosts -m ping -> to verify connection
 
 [aws_ec2_servers]
@@ -13,8 +12,8 @@ nexus_servers
 encoding_servers
 
 [aws_ec2_servers:vars]
-ansible_ssh_private_key_file=TODO
-ansible_user=TODO
+ansible_ssh_private_key_file=~/.ssh/admin-ssh-key.pem
+ansible_user=ubuntu
 
 [jenkins_servers]
 3.71.95.122
