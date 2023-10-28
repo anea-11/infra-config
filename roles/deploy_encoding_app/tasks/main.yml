@@ -1,6 +1,6 @@
 ---
-name: Log into DockerHub
-  docker_login:
+- name: Log into DockerHub
+  community.docker.docker_login:
     username: "{{ dockerhub_user }}"
     password: "{{ dockerhub_pass }}"
 
@@ -14,8 +14,8 @@ name: Log into DockerHub
     name: "{{ docker_registry }}/{{ frontend_img_name }}:{{ frontend_img_version }}"
     source: pull
 
-name: Log out of DockerHub
-  docker_login:
+- name: Log out of DockerHub
+  community.docker.docker_login:
     state: absent
 
 - name: Start encoding app containers
