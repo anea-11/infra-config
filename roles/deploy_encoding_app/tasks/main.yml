@@ -1,4 +1,9 @@
 ---
+name: Log into DockerHub
+  docker_login:
+    username: "{{ dockerhub_user }}"
+    password: "{{ dockerhub_pass }}"
+
 - name: Pull encoder image
   community.docker.docker_image:
     name: "{{ docker_registry }}/{{ encoder_img_name }}:{{ encoder_img_version }}"
@@ -8,6 +13,10 @@
   community.docker.docker_image:
     name: "{{ docker_registry }}/{{ frontend_img_name }}:{{ frontend_img_version }}"
     source: pull
+
+name: Log out of DockerHub
+  docker_login:
+    state: absent
 
 - name: Start encoding app containers
   community.docker.docker_compose:
