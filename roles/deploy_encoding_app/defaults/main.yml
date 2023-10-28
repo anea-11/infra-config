@@ -4,4 +4,4 @@ encoder_img_version:  latest
 frontend_img_version: latest
 encoder_img_name:     encoder-x265-img
 frontend_img_name:    frontend-img
-docker_registry:      https://index.docker.io/v1/anea11/encoding
+docker_registry:      index.docker.io/v1/anea11/encoding
