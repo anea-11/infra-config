@@ -1,12 +1,12 @@
 ---
 - name: Pull encoder image
   community.docker.docker_image:
-    name: {{ docker_registry }}/{{ encoder_img_name }}:{{ encoder_img_version }}
+    name: "{{ docker_registry }}/{{ encoder_img_name }}:{{ encoder_img_version }}"
     source: pull
 
 - name: Pull frontend image
   community.docker.docker_image:
-    name: {{ docker_registry }}/{{ frontend_img_name }}:{{ frontend_img_version }}
+    name: "{{ docker_registry }}/{{ frontend_img_name }}:{{ frontend_img_version }}"
     source: pull
 
 - name: Start encoding app containers
