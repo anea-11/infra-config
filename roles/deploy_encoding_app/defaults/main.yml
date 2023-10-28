@@ -2,6 +2,6 @@ frontend_port:        8080
 encoding_endpoint:    encode
 encoder_img_version:  latest
 frontend_img_version: latest
-encoder_img_name:     encoder-x265-img
-frontend_img_name:    frontend-img
+encoder_img_name:     encoder-x265
+frontend_img_name:    frontend
 docker_registry:      anea11/encoding

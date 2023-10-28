@@ -32,3 +32,5 @@
     name:
       - jenkins
     state: present
+
+# TODO: add Jenkins to Docker group
