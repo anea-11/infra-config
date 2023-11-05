@@ -33,3 +33,5 @@ RUN wget "https://github.com/helmfile/helmfile/releases/download/v0.158.1/helmfi
     tar -zxvf helmfile_0.158.1_linux_arm64.tar.gz && \
     mv helmfile /usr/local/bin/helmfile
 
+# Install git
+RUN apt install -yy git
