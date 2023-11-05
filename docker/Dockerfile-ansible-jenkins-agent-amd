@@ -35,3 +35,7 @@ RUN wget "https://github.com/helmfile/helmfile/releases/download/v0.158.1/helmfi
 
 # Install git
 RUN apt install -yy git
+
+# Set non-root user
+RUN groupadd -r ansible && useradd -r -g ansible ansible
+USER ansible
