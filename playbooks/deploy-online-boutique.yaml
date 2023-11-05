@@ -1,6 +1,5 @@
 - name: Deploy online boutique app on AWS EKS
   hosts: localhost
-  become: yes
 
   roles:
     - role: deploy_online_boutique
