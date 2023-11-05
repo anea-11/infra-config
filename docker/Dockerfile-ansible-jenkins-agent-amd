@@ -32,7 +32,3 @@ RUN apt install -yy wget && \
 RUN wget "https://github.com/helmfile/helmfile/releases/download/v0.158.1/helmfile_0.158.1_linux_amd64.tar.gz" && \
     tar -zxvf helmfile_0.158.1_linux_amd64.tar.gz && \
     mv helmfile /usr/local/bin/helmfile
-
-# Set non-root user
-RUN groupadd -r ansible && useradd -r -g ansible ansible
-USER ansible
