@@ -1,0 +1,34 @@
+FROM ubuntu:22.04
+
+# Install aws cli
+RUN apt update && \
+    apt install -yy curl unzip less mandoc && \
+    curl "https://awscli.amazonaws.com/awscli-exe-linux-aarch64.zip" -o "awscliv2.zip" && \
+    unzip awscliv2.zip && \
+    ./aws/install
+
+# Install aws-iam-authenticator
+RUN curl -Lo aws-iam-authenticator https://github.com/kubernetes-sigs/aws-iam-authenticator/releases/download/v0.6.11/aws-iam-authenticator_0.6.11_linux_arm64 && \
+    chmod +x ./aws-iam-authenticator && \
+    mv aws-iam-authenticator /usr/local/bin/aws-iam-authenticator
+
+# Install Ansible
+RUN apt update && \
+    apt install -yy software-properties-common && \
+    add-apt-repository --yes --update ppa:ansible/ansible && \
+    apt install -yy ansible
+
+# Install kubectl
+RUN curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/arm64/kubectl" && \
+    install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
+
+# Install helm
+RUN apt install -yy wget && \
+    wget "https://get.helm.sh/helm-v3.13.1-linux-arm64.tar.gz" && \
+    tar -zxvf helm-v3.13.1-linux-arm64.tar.gz && \
+    mv linux-arm64/helm /usr/local/bin/helm
+
+# Install helmfile
+RUN wget "https://github.com/helmfile/helmfile/releases/download/v0.158.1/helmfile_0.158.1_linux_arm64.tar.gz" && \
+    tar -zxvf helmfile_0.158.1_linux_arm64.tar.gz && \
+    mv helmfile /usr/local/bin/helmfile
