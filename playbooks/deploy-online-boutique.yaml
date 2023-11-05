@@ -1,0 +1,10 @@
+- name: Deploy online boutique app on AWS EKS
+  hosts: localhost
+
+  roles:
+    - role: deploy_online_boutique
+      vars:
+        k8s_config_repo: https://github.com/anea-11/kubernetes-manifests
+        k8s_config_version: main
+        k8s_namespaces_config: global/namespaces.yaml
+        k8s_helmfile_dir: online_boutique/helm
