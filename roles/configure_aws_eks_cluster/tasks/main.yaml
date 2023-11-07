@@ -3,6 +3,19 @@
   ansible.builtin.shell:
     cmd: aws eks update-kubeconfig --name {{ cluster_name }} --region {{ cluster_region }}
 
+- name: Add admin user to aws-auth eks map
+  ansible.builtin.shell:
+    cmd: |
+      eksctl create iamidentitymapping --cluster {{ cluster_name }} --region={{ cluster_region }} \
+      --arn arn:aws:iam::{{IAM_account_id}}::user/admin --group system:masters --username admin
+
+- name: Delete default efs csi driver
+  ansible.builtin.shell:
+    cmd: eksctl delete addon --cluster online-boutique-cluster --name aws-efs-csi-driver
+  ignore_errors: yes  # an error is possible if default efs is not present; sometimes it is there, other times it's not
+
+# Important: ensure that an old AmazonEKS_EFS_CSI_DriverRole (from old cluster) role is deleted before running this, otherwise the role will point
+# to the old cluster that does not exist anymore and nothing works
 - name: Create IAM role for EFS CSI driver
   ansible.builtin.shell:
     cmd: |
@@ -31,6 +44,7 @@
       sed -e 's/efs-csi-controller-sa/efs-csi-*/' -e 's/StringEquals/StringLike/')
 
       aws iam update-assume-role-policy --role-name $role_name --policy-document "$TRUST_POLICY"
+  ignore_errors: yes  # second "eks create" usually gives some error message, but everything works fine, so ignore it
 
 - name: Install EFS CSI driver to cluster
   ansible.builtin.shell:
@@ -38,7 +52,8 @@
       eksctl create addon --cluster {{ cluster_name }} --name aws-efs-csi-driver --version latest \
       --service-account-role-arn arn:aws:iam::{{ IAM_account_id }}:role/AmazonEKS_EFS_CSI_DriverRole --force
 
-- name: Unset default gp2 storage cluss
+# AWS EKS provides a default storage class named gp2; this storage class uses EBS and must be unset as default 
+- name: Unset default gp2 storage class
   ansible.builtin.shell:
     cmd: | 
       kubectl patch storageclass gp2 -p '{"metadata": {"annotations":{"storageclass.kubernetes.io/is-default-class":"false"}}}'
@@ -53,7 +68,4 @@
   ansible.builtin.shell:
     chdir: "{{ k8s_config_repo_path }}"
     cmd: helm install efs-storage-class {{ k8s_global_helmchart_dir }} --set efsId="{{ efs_id }}"
-
-
-
 
