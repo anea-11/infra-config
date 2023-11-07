@@ -1,0 +1,16 @@
+- name: Configure aws eks cluster
+  hosts: localhost
+
+  roles:
+    - role: configure_aws_eks_cluster
+      vars:
+        cluster_name: online-boutique-cluster
+        cluster_region: eu-west-1
+        k8s_config_repo: https://github.com/anea-11/kubernetes-manifests
+        k8s_config_version: main
+        k8s_global_helmchart_dir: global/helm/global-chart
+        IAM_account_id: 474024458802
+        efs_id: fs-xxx
+
+# correct efs_id value should be passed from command line when executing this playbook
+# terraform infrastructure formation config outputs efs_id of the EFS that it created
