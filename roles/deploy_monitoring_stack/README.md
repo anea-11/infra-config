@@ -1,0 +1,1 @@
+Host that executes this playbook requires ansible, kubectl, helm and helmfile installed

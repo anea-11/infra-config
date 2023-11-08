@@ -1,0 +1,27 @@
+---
+- name: Checkout repo with manifest files
+  ansible.builtin.git:
+    repo: "{{ k8s_config_repo }}"
+    dest: "{{ k8s_config_repo_path }}"
+    version: "{{ k8s_config_version }}"
+
+- name: Create monitoring namespace in k8s cluster
+  ansible.builtin.shell:
+    chdir: "{{ k8s_config_repo_path }}"
+    cmd: kubectl apply -f {{ k8s_namespaces_config }}
+
+- name: Install prometheus and grafana helm charts in k8s cluster
+  ansible.builtin.shell:
+    chdir: "{{ k8s_config_repo_path }}"
+    cmd: bash {{ monitoring_deploy_script }}
+
+- name: Add load balancer for grafana
+  ansible.builtin.shell:
+    chdir: "{{ k8s_config_repo_path }}"
+    cmd: kubectl apply --namespace monitoring -f {{ grafana_lb_config_file }}
+
+- name: Cleanup
+  ansible.builtin.file:
+    path:  "{{ k8s_config_repo_path }}"
+    state: absent
+    
