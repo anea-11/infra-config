@@ -12,4 +12,4 @@ These playbooks are invoked from [Jenkins CICD pipelines](https://github.com/ane
 
 # Dockerfiles
 
-Directory `docker` contains Dockerfiles which are used by [Jenkins CICD pipelines](https://github.com/anea-11/jenkins-utils). Dockerfile is built in-place from Jenkins pipeline. Resulting image is used as build agent which contains all the dependencies needed to deploy to EKS. See [https://github.com/anea-11/jenkins-utils/blob/main/vars/deployOnlineBoutiqueToEKS.groovy](this file) to see how this is done.
+Directory `docker` contains Dockerfiles which are used by [Jenkins CICD pipelines](https://github.com/anea-11/jenkins-utils). Dockerfile is built in-place from Jenkins pipeline. Resulting image is used as build agent which contains all the dependencies needed to deploy to EKS. See [this file](https://github.com/anea-11/jenkins-utils/blob/main/vars/deployOnlineBoutiqueToEKS.groovy) to see how this is done.
